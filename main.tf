@@ -8,22 +8,6 @@ module "label" {
   tags       = var.tags
 }
 
-locals {
-  public_key_filename = format(
-    "%s/%s%s",
-    var.ssh_public_key_path,
-    module.label.id,
-    var.public_key_extension
-  )
-
-  private_key_filename = format(
-    "%s/%s%s",
-    var.ssh_public_key_path,
-    module.label.id,
-    var.private_key_extension
-  )
-}
-
 resource "tls_private_key" "default" {
   count     = var.generate_ssh_key == true ? 1 : 0
   algorithm = var.ssh_key_algorithm
